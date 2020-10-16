@@ -1,10 +1,13 @@
 {
   "name": "todo_ms_api",
   "private": true,
+  "type": "module",
   "scripts": {
-  	"start": "node index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^5.0.0-alpha.8",
+    "nodemon": "^2.0.5",
+    "ramda": "^0.27.1"
   }
 }
