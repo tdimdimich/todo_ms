@@ -15,6 +15,14 @@ services:
         volumes:
             - ./api/:/app/
         working_dir: /app/
-        command: yarn start
+        command: sh -c "yarn install && yarn start"
+        
+        
+    web:
+        image: node:14.14-alpine
+        volumes:
+            - ./web/:/app/
+        working_dir: /app/
+        command: sh -c "yarn install && yarn start"
         
         
