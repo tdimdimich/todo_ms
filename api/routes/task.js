@@ -8,7 +8,7 @@ const router = Router()
 
 router.get('/', async (req, res) => {
 	const list = await TaskService.findAll()
-	res.json(list)
+	res.json({ items: list })
 })
 
 
