@@ -1,24 +1,21 @@
 import { Router } from 'express'
-import * as TaskService from '../services/task.js'
+import TaskController from 'controllers/task'
+
 
 
 const router = Router()
 
 
-
 router.get('/', async (req, res) => {
-	const list = await TaskService.findAll()
+	const list = await TaskController.findAll()
 	res.json({ items: list })
 })
 
-
 router.get('/create', async (req, res) => {
 	const { name = 'new', state = 'open' } = req.query
-	const task = await TaskService.create({ name, state })
+	const task = await TaskController.create({ name, state })
 	res.json({ status: 'done', task })
 })
-
-
 
 
 export default router
