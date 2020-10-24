@@ -13,7 +13,7 @@ const validateTask = (task) => {
 
 export const create = async (task) => {
 	await sleep(100)
-	const createdTask = { ...task, id: ++taskRepository.sequence }
+	const createdTask = { ...task, id: ++taskRepository.sequence + '' }
 	taskRepository.data.push(createdTask)
 	return createdTask
 }

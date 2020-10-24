@@ -2,8 +2,10 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
+import TaskItem from './TaskItem'
+
 import { fetchTaskList } from './actions'
-import { selectTaskItems } from './selectors'
+import { selectTaskList } from './selectors'
 
 const TaskList = () => {
 	const dispatch = useDispatch()
@@ -12,13 +14,13 @@ const TaskList = () => {
 		dispatch(fetchTaskList())
 	}, [])
 	
-	const items = useSelector(selectTaskItems)
+	const list = useSelector(selectTaskList) || []
 	
 	return (
 		<div>
-			{items.map((task) => (
-				<div key={task.id}>{ task.name }</div>
-			))}
+			<ul class="list-group">
+				{ list.map((id) => <TaskItem key={id} id={id} />) }
+			</ul>
 		</div>
 	)
 }

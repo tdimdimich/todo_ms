@@ -7,3 +7,7 @@ export const fetchTaskList = () => async (dispatch, getState) => {
 	dispatch({ type: UPDATE_TASK_LIST, payload: res.data })
 }
 
+
+export const toggleTaskState = (id) => async (dispatch, getState) => {
+	console.log('toggleTaskState', id)
+}
