@@ -1,16 +1,20 @@
-
 import express from 'express'
+import cookieParser from 'cookie-parser'
+import mongoose from 'mongoose'
+
+
+import { MONGODB_URL } from 'config/constants'
 
 export default async () => {
 	const app = express()
+	await mongoose.connect(MONGODB_URL, { useNewUrlParser: true })
 	
+	app.use(cookieParser())
 	
-	app.use('/api/task', require('routes/task').default)
+	app.use(require('middlewares/authenticate').default)
 	
+	app.use('/api/auth', require('routes/auth').default)
 	
-	
-
-
 	app.use(errorHandler)
 	app.use(notFoundHandler)
 
