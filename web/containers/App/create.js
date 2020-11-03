@@ -1,30 +1,29 @@
 import React from 'react'
 
-import { createStore, applyMiddleware } from 'redux'
 import { Provider as ReduxProvider } from 'react-redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
+import { createBrowserHistory } from 'history'
+import { ConnectedRouter } from 'connected-react-router'
+import { connectRouter as routerReducer, routerMiddleware } from 'connected-react-router'
 
-
+import createStore from './store'
 import Layout from 'containers/Layout'
-
-import reducer from './reducer'
-
-
-const logger = createLogger({
-	collapsed: true,
-})
-
-const middlewares = applyMiddleware(thunk, logger)
+import Router from 'containers/Router'
 
 
 export default async () => {
 	
-	const store = createStore(reducer, {}, middlewares)
+	const history = createBrowserHistory()
+	const reducers = { router: routerReducer(history) }
+	const middlewares = [ routerMiddleware(history) ]
+	const store = createStore(reducers, {}, middlewares)
 	
 	const App = () => (
 		<ReduxProvider store={store}>
-			<Layout/>
+			<ConnectedRouter history={history}>
+				<Layout>
+					<Router/>
+				</Layout>
+			</ConnectedRouter>
 		</ReduxProvider>
 	)
 	

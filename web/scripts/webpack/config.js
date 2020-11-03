@@ -21,6 +21,7 @@ module.exports = {
 			config: `${ROOT_DIR}/config/`,
 			components: `${ROOT_DIR}/components/`,
 			containers: `${ROOT_DIR}/containers/`,
+			pages: `${ROOT_DIR}/pages/`,
 		},
 	},
 	module: {
