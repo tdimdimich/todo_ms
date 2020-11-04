@@ -12,7 +12,7 @@ const LoginForm = ({ handleSubmit }) => {
 			<Field name="username" component={TextField} label={'Username'} />
 			<Field name="password" component={TextField} label={'Password'} type="password"/>
 			<div class="d-flex justify-content-end mt-3">
-				<button type="submit" class="btn btn-link" onClick={gotoSignup}>Signup</button>
+				<button type="button" class="btn btn-link" onClick={gotoSignup}>Signup</button>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</div>
 		</form>
