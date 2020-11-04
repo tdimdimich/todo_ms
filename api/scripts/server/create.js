@@ -1,5 +1,6 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 
 
@@ -10,6 +11,7 @@ export default async () => {
 	await mongoose.connect(MONGODB_URL, { useNewUrlParser: true })
 	
 	app.use(cookieParser())
+	app.use(bodyParser.json())
 	
 	app.use(require('middlewares/authenticate').default)
 	

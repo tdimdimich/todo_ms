@@ -3,13 +3,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
+import { reducer as formReducer } from 'redux-form'
+
 import dynamicMiddlewares, { addMiddleware } from 'redux-dynamic-middlewares'
 
 const logger = createLogger({ collapsed: true })
 
 export default (initialReducers = {}, initialState = {}, initialMiddlewares = []) => {
 	
-	const reducers = { ...initialReducers }
+	const reducers = { form: formReducer, ...initialReducers }
 	const middleware = applyMiddleware(thunk, logger, ...initialMiddlewares, dynamicMiddlewares)
 	
 	const store = createStore(combineReducers(reducers), initialState, middleware)
