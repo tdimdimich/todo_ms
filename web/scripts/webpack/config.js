@@ -22,6 +22,7 @@ module.exports = {
 			components: `${ROOT_DIR}/components/`,
 			containers: `${ROOT_DIR}/containers/`,
 			pages: `${ROOT_DIR}/pages/`,
+			lib: `${ROOT_DIR}/lib/`,
 		},
 	},
 	module: {

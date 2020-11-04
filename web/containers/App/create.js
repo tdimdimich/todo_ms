@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import { connectRouter as routerReducer, routerMiddleware } from 'connected-react-router'
 
 import createStore from './store'
-import Layout from 'containers/Layout'
+import AuthProvider from 'containers/Auth'
 import Router from 'containers/Router'
 
 
@@ -19,11 +19,11 @@ export default async () => {
 	
 	const App = () => (
 		<ReduxProvider store={store}>
-			<ConnectedRouter history={history}>
-				<Layout>
+			<AuthProvider>
+				<ConnectedRouter history={history}>
 					<Router/>
-				</Layout>
-			</ConnectedRouter>
+				</ConnectedRouter>
+			</AuthProvider>
 		</ReduxProvider>
 	)
 	

@@ -29,6 +29,11 @@ router.post('/login', async (req, res) => {
 	res.json({ user })
 })
 
+router.post('/logout', (req, res) => {
+	res.cookie(AUTH_COOKIE_KEY, '', { maxAge: 0 })
+	res.json({})
+})
+
 
 const setCookieJwtToken = async (res, payload) => {
 	const token = await generateToken(payload, AUTH_COOKIE_TIME)
