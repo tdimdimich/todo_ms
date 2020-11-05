@@ -34,9 +34,8 @@ const Header = () => {
 							{ user && <Link className="nav-link" to="/account">{ user.username }</Link>}
 						</li>
 						<li class="nav-item">
-							{ user && <Link className="nav-link" onClick={logoutCallback}>Logout</Link> }
+							{ user && <button className="btn btn-link nav-link border-0" onClick={logoutCallback}>Logout</button> }
 						</li>
-						
 					</ul>
 				</div>
 			</div>
