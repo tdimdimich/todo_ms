@@ -40,6 +40,28 @@ services:
             - traefik.http.routers.api.rule=Host(`${HOSTNAME}`) && PathPrefix(`/api`)
             - traefik.http.routers.api.entrypoints=web
             - traefik.http.services.api.loadbalancer.server.port=80
+    
+    auth:
+        image: node:14.14-alpine
+        volumes:
+            - ./auth/:/app/
+        working_dir: /app/
+        environment:
+            POSTGRES_URL: postgresql://username:password@auth_db/auth
+        command: sh -c "yarn install && yarn start"
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.auth.rule=Host(`${HOSTNAME}`) && PathPrefix(`/api/auth`)
+            - traefik.http.routers.auth.entrypoints=web
+            - traefik.http.services.auth.loadbalancer.server.port=80
+            
+    auth_db:
+        image: postgres:13.0-alpine
+        environment:
+            POSTGRES_DB: auth
+            POSTGRES_USER: username
+            POSTGRES_PASSWORD: password
+            
 
     mongo:
         image: mongo:4.4
@@ -61,4 +83,10 @@ services:
             - traefik.http.services.mongo_express.loadbalancer.server.port=8081
             
             
-        
+    adminer:
+        image: adminer
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.adminer.rule=Host(`${HOSTNAME}`) && PathPrefix(`/adminer`)
+            - traefik.http.routers.adminer.entrypoints=web
+            - traefik.http.services.adminer.loadbalancer.server.port=8080

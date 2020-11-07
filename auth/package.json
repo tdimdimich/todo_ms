@@ -1,0 +1,66 @@
+{
+  "name": "auth",
+  "private": true,
+  "scripts": {
+    "start": "nodemon scripts/app.start.js",
+    "knex": "knex",
+    "migrate": "knex migrate:latest",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bson": "^4.2.0",
+    "connect-timeout": "^1.9.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "fastest-validator": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.12",
+    "module-alias": "^2.2.2",
+    "pg": "^8.4.2",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-expect-message": "^1.0.2",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  },
+  "_moduleAliases": {
+    "config": "config",
+    "lib": "lib",
+    "middlewares": "middlewares",
+    "routes": "routes",
+    "services": "services"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "jest-expect-message",
+      "./scripts/jest.setup.js"
+    ],
+    "moduleNameMapper": {
+      "^config/(.*)": "<rootDir>/config/$1",
+      "^lib/(.*)": "<rootDir>/lib/$1",
+      "^middlewares/(.*)": "<rootDir>/middlewares/$1",
+      "^routes/(.*)": "<rootDir>/routes/$1",
+      "^services/(.*)": "<rootDir>/services/$1"
+    }
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "tests/*",
+      "node_modules/*"
+    ],
+    "watch": [
+      "config",
+      "middlewares",
+      "services",
+      "routes",
+      "scripts"
+    ],
+    "ext": "js,json"
+  }
+}

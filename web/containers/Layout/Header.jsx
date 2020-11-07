@@ -25,16 +25,16 @@ const Header = () => {
 					</ul>
 					<ul class="navbar-nav navbar-right mb-2 mb-lg-0">
 						<li class="nav-item">
-							{ !user && <Link className="nav-link" to="/login">Login</Link> }
+							{ !user.id && <Link className="nav-link" to="/login">Login</Link> }
 						</li>
 						<li class="nav-item">
-							{ user && <Link className="nav-link" to="/tasks">My Tasks</Link>}
+							{ user.id && <Link className="nav-link" to="/tasks">My Tasks</Link>}
 						</li>
 						<li class="nav-item">
-							{ user && <Link className="nav-link" to="/account">{ user.username }</Link>}
+							{ user.id && <Link className="nav-link" to="/account">{ user.username }</Link>}
 						</li>
 						<li class="nav-item">
-							{ user && <button className="btn btn-link nav-link border-0" onClick={logoutCallback}>Logout</button> }
+							{ user.id && <button className="btn btn-link nav-link border-0" onClick={logoutCallback}>Logout</button> }
 						</li>
 					</ul>
 				</div>
