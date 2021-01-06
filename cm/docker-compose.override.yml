@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+    adminer:
+        image: adminer
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.adminer.rule=Host(`${HOSTNAME}`) && PathPrefix(`/devtools/adminer`)
+            - traefik.http.routers.adminer.entrypoints=web
+            - traefik.http.services.adminer.loadbalancer.server.port=8080
+
+    mongo_express:
+        image: mongo-express
+        environment:
+            ME_CONFIG_SITE_BASEURL: /devtools/mongo
+            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_ADMINUSERNAME: username
+            ME_CONFIG_MONGODB_ADMINPASSWORD: password
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.mongo_express.rule=Host(`${HOSTNAME}`) && PathPrefix(`/devtools/mongo`)
+            - traefik.http.routers.mongo_express.entrypoints=web
+            - traefik.http.services.mongo_express.loadbalancer.server.port=8081
+            
+            

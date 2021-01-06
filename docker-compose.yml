@@ -22,6 +22,8 @@ services:
             - ./web/:/app/
         working_dir: /app/
         command: sh -c "yarn install && yarn start"
+        environment:
+            APP_ENV: ${APP_ENV}
         labels:
             - traefik.enable=true
             - traefik.http.routers.web.rule=Host(`${HOSTNAME}`) && PathPrefix(`/`)
@@ -47,6 +49,7 @@ services:
             - ./auth/:/app/
         working_dir: /app/
         environment:
+            APP_ENV: ${APP_ENV}
             POSTGRES_URL: postgresql://username:password@auth_db/auth
         command: sh -c "yarn install && yarn start"
         labels:
@@ -68,25 +71,5 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: username
             MONGO_INITDB_ROOT_PASSWORD: password
-            
-    mongo_express:
-        image: mongo-express
-        environment:
-            ME_CONFIG_SITE_BASEURL: /mongo
-            ME_CONFIG_MONGODB_SERVER: mongo
-            ME_CONFIG_MONGODB_ADMINUSERNAME: username
-            ME_CONFIG_MONGODB_ADMINPASSWORD: password
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.mongo_express.rule=Host(`${HOSTNAME}`) && PathPrefix(`/mongo`)
-            - traefik.http.routers.mongo_express.entrypoints=web
-            - traefik.http.services.mongo_express.loadbalancer.server.port=8081
-            
-            
-    adminer:
-        image: adminer
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.adminer.rule=Host(`${HOSTNAME}`) && PathPrefix(`/adminer`)
-            - traefik.http.routers.adminer.entrypoints=web
-            - traefik.http.services.adminer.loadbalancer.server.port=8080
+
+
